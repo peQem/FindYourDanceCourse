@@ -1,0 +1,3 @@
+# v 0.0.1.20180626
+	- powstanie koncepcji
+	- nauka Data Scrapping
