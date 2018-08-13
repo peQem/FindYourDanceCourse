@@ -17,21 +17,13 @@ nl_webpage <- read_html(nl_url)
 
 # pobieram dane z odpowiedniego miejsca strony do wektora
 nl_records <- nl_webpage %>% 
-  html_nodes("td") %>% 
-  html_text()
-
-# pierwsze 5 ifnormacji jest niepotrzebne
-nl_records = nl_records[-(1:5)]
-
-# ustawienie danych w formacie macierzy
-nl_mx_rec = matrix(nl_records, ncol = 7, byrow = TRUE)
-
-nl_wynik_frame <- data.frame(nl_mx_rec)
-colnames(nl_wynik_frame) <- c("Puste", "Dzien", "Godziny", "Rodzaj", "Poziom", "Instruktor", "Ulica")
-
+  html_nodes("table") %>% 
+  .[[2]] %>% 
+  html_table()
 
 
 # La Rosa Negra ####
+# zostawiam na koniec
 # link do strony z grafikiem
 lr_url <- "http://www.larosanegra.wroclaw.pl/grafik-zajec"
 lr_webpage <- read_html(lr_url)
@@ -50,11 +42,10 @@ lr_records_pom <- lr_webpage %>%
   lr_records <- rbind(lr_records, lr_records_pom)
 }
 
-Warning messages:
-  1: In rbind(lr_records, lr_records_pom) :
-  number of columns of result is not a multiple of vector length (arg 2)
-2: In rbind(lr_records, lr_records_pom) :
-  number of columns of result is not a multiple of vector length (arg 2)
+lr_records <- lr_webpage %>% 
+  html_nodes(".page-calendar") %>% 
+  html_attrs()
+
 
 lr_records
 
@@ -71,3 +62,27 @@ lr_mx_rec = matrix(lr_records, ncol = 7, byrow = TRUE)
 
 lr_wynik_frame <- data.frame(lr_mx_rec)
 colnames(lr_wynik_frame) <- c("Puste", "Dzien", "Godziny", "Rodzaj", "Poziom", "Instruktor", "Ulica")
+
+
+# Dance Flow ####
+# link do strony z grafikiem
+df_url <- "http://danceflow.pl/schedule/"
+df_webpage <- read_html(df_url)
+
+# pobieram dane z odpowiedniego miejsca strony do wektora
+df_records <- df_webpage %>% 
+  html_nodes(".event_header, .before_hour_text, .hours, .after_hour_text #text") %>% 
+  html_text()
+
+ %>% 
+  trimws() %>% 
+  matrix(ncol = 4, byrow = TRUE)
+
+df_records
+
+df_records <- df_webpage %>% 
+  html_nodes("table") %>% 
+  html_table()
+
+df_records
+

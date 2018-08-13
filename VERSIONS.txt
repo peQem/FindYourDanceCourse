@@ -1,3 +1,7 @@
 # v 0.0.1.20180626
 	- powstanie koncepcji
 	- nauka Data Scrapping
+
+# v 0.0.2.20180729
+	- wiem jak 쐁i퉓n방 dane z No Limits
+	- prawie wiem jak 쐁i퉓n방 dane z La Rosa Negra
