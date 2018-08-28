@@ -84,5 +84,6 @@ df_records <- df_webpage %>%
   html_nodes("table") %>% 
   html_table()
 
-df_records
+df_records$Czwartek
 
+str(df_records)
